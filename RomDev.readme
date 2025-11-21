@@ -1,0 +1,23 @@
+Roman to Devanagari conversion TecKit map for use with XeTex and
+XeLaTeX. This file was supplied by Som Dev Vasudeva.
+
+This is a binary (compiled) file and might not work on all computer
+architectures. If it doesn't work for you, you might have to compile
+your own map file, RomDev.map, which you can get from
+http://github.com/somadeva/RomDev.
+
+For an example of RomDev.tec's use, see:
+
+http://cikitsa.blogspot.com/2010/07/minimal-edition-of-sanskrit-verse-using.html
+
+More information can be found here:
+
+http://sarasvatam.blogspot.com/2010/03/updated-teckit-romdev.html
+http://cikitsa.blogspot.com/2010/07/how-do-i-install-romdev-mapping-for.html
+
+And the teckit homepage:
+
+http://scripts.sil.org/TECkit
+
+--
+author: patrick mc allister <pma@rdorte.org>
