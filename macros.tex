@@ -1,5 +1,5 @@
 \usepackage[papersize={24.4602cm,28.575cm},textwidth=18.9cm,
-textheight=25.575cm,topmargin=15mm,botmargin=15mm,headsep=0mm,headheight=0mm,
+textheight=25.575cm,topmargin=15mm,botmargin=15mm,headsep=0mm,headheight=15pt,
 leftmargin=28mm,rightmargin=28mm,footskip=0.5cm]{zwpagelayout}
 
 %~ \usepackage[
@@ -115,10 +115,29 @@ leftmargin=28mm,rightmargin=28mm,footskip=0.5cm]{zwpagelayout}
 \def\heading#1{%
 \centerline{\large\iflanguage{english}{\color{deepmaroon}{#1}}{#1}}%
 }
+\def\suggheading#1{%
+\centerline{{\LARGE\iflanguage{english}{\color{deepmaroon}{#1}}{#1}}}%
+}
+
+\def\headingnoclr#1{%
+\centerline{\large\iflanguage{english}{#1}{#1}}%
+}
+
+
 \def\subheading#1{\centerline{\large #1}}
 \def\genheading#1{\centerline{\large\bfseries #1}}
+\def\dummyimage{~\vskip 10mm
+\centerline{\fcolorbox{plum}{white}{\phantom{\rule{15cm}{6cm}}}}
+\vskip 20mm}
+\def\fclrbox#1{\fcolorbox{plum}{white}{#1}}
+\def\img{~\vskip 10mm\ignorespaces\centering}
+\def\endimg{\vskip 20mm}
+
+\def\clrnormalheading#1{{\color{deepmaroon}{#1}}}
+
 
 \makeatletter
+
 \def\@makeenmark{$^{\theenmark}$}
 \makeatother
 
@@ -148,8 +167,8 @@ leftmargin=28mm,rightmargin=28mm,footskip=0.5cm]{zwpagelayout}
     %~ \endgroup
   %~ \fi}
   
-%~ \pagestyle{fancy}
-%~ \renewcommand\headrulewidth{0pt}
-
+\pagestyle{fancy}
+\renewcommand\headrulewidth{0pt}
+\cfoot[]{}
 
 
