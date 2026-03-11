@@ -64,22 +64,7 @@ leftmargin=28mm,rightmargin=28mm,footskip=0pt]{zwpagelayout}
 \newlength{\borderoffset}
 \setlength{\borderoffset}{10mm} % Set the distance of the border from the page edge
 
-% Add the Border to Every Page
-\AddToShipoutPictureBG{%
-\begin{tikzpicture}[overlay, remember picture]
-  \node[inner sep=0pt, minimum width=\paperwidth, minimum height=\paperheight] at (current page.center) {
-    \includegraphics[width=21.8cm, height=27cm, keepaspectratio]{border2.png}
-  };
-\end{tikzpicture}%
-\begin{tikzpicture}[overlay, remember picture]
-    % Placing the page number at coordinate (3, -3) from the top-left corner
-    %\node[anchor=north west] at (3, -3) {Page \thepage};
 
-    % Placing the page number 2cm from the bottom-right corner
-    %\node[anchor=south east] at ($(current page.south) + (0.5cm, 1cm)$) {\thepage};
-    \node[anchor=south, yshift=1cm] at (current page.south) {\Large \thepage};
-\end{tikzpicture}
-}
 
 % Main language
 \setmainlanguage{english}
@@ -242,6 +227,24 @@ leftmargin=28mm,rightmargin=28mm,footskip=0pt]{zwpagelayout}
 \end{tabular}}
 \bigskip
 } 
+
+
+% Add the Border to Every Page
+\AddToShipoutPictureBG{%
+\begin{tikzpicture}[overlay, remember picture]
+  \node[inner sep=0pt, minimum width=\paperwidth, minimum height=\paperheight] at (current page.center) {
+    \includegraphics[width=21.8cm, height=27cm, keepaspectratio]{border2.png}
+  };
+\end{tikzpicture}%
+\begin{tikzpicture}[overlay, remember picture]
+    % Placing the page number at coordinate (3, -3) from the top-left corner
+    %\node[anchor=north west] at (3, -3) {Page \thepage};
+
+    % Placing the page number 2cm from the bottom-right corner
+    %\node[anchor=south east] at ($(current page.south) + (0.5cm, 1cm)$) {\thepage};
+    \node[anchor=south, yshift=1cm] at (current page.south) {\Large \enginline{\thepage}};
+\end{tikzpicture}
+}
 
 \def\engname#1{\textbf{#1}}
 \def\engiast#1{\textit{#1}}
