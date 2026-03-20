@@ -30,6 +30,7 @@ leftmargin=28mm,rightmargin=28mm,footskip=0pt]{zwpagelayout}
 \usepackage{fancyhdr}
 \usepackage{enumitem}
 \usepackage{stackengine}
+%\usepackage{showframe}
 
 %\definecolor{ArchivalCream}{HTML}{f9f1f1} % A soft cream for your archive
 %\definecolor{ArchivalCream}{HTML}{F5EFE2} % A soft cream for your archive
@@ -118,24 +119,23 @@ leftmargin=28mm,rightmargin=28mm,footskip=0pt]{zwpagelayout}
 \def\kaninline#1{{\setstretch{1.4}\textkannada{#1}}}
 \def\enginline#1{{\setstretch{1.4}\textenglish{#1}}}
 
-\def\titleinline#1{\centerline{\LARGE #1}}
-\def\heading#1{%
-{\large\iflanguage{english}{\color{deepmaroon}{\textbf{#1}}}{\textbf{#1}}}%
-}
-\def\suggheading#1{%
-{{\LARGE\iflanguage{english}{\color{deepmaroon}{#1}}{#1}}}%
-}
 
+\def\booktitle#1{{\fontsize{36pt}{43.2pt}\fontseries{bx}\selectfont \color{deepmaroon}{#1}}}
+\def\titleinline#1{\centerline{\LARGE #1}}
+
+\def\Section#1{{\Large\bfseries\color{deepmaroon}{#1}}}
+\def\Subsection#1{{\large\bfseries #1}}
+\def\SSubsection#1{#1}
+
+\def\heading#1{{\large\color{deepmaroon}{\textbf{#1}}}}%
+\def\subheading#1{{\textbf{#1}}}%
+\def\suggheading#1{{\LARGE\color{deepmaroon}{#1}}}
 \def\suggheadingk#1{%
 {{\LARGE\iflanguage{kannada}{\color{deepmaroon}{#1}}{#1}}}%
 }
-
 \def\headingnoclr#1{%
-{\large\iflanguage{english}{#1}{#1}}%
+{\large #1}%
 }
-
-
-\def\subheading#1{{\large #1}}
 \def\genheading#1{\centerline{\large\bfseries #1}}
 \def\dummyimage{~\vskip 10mm
 \centerline{\fcolorbox{plum}{white}{\phantom{\rule{15cm}{6cm}}}}
@@ -145,7 +145,6 @@ leftmargin=28mm,rightmargin=28mm,footskip=0pt]{zwpagelayout}
 \def\endimg{\vskip 5mm}
 
 \newcounter{anum}
-
 \def\asananum{\enginline{\theanum.}}
 \def\incanum{\stepcounter{anum}}
 \long\def\insimg#1{
@@ -157,7 +156,8 @@ leftmargin=28mm,rightmargin=28mm,footskip=0pt]{zwpagelayout}
 \fclrbox{\includegraphics[width=0.92\textwidth]{#1}}}
 }
 
-\def\clrnormalheading#1{{\color{deepmaroon}{#1}}}
+%%normalsize heading with color
+\def\headingnsize#1{{\color{deepmaroon}{\textbf{#1}}}}
 
 
 
@@ -272,3 +272,6 @@ leftmargin=28mm,rightmargin=28mm,footskip=0pt]{zwpagelayout}
 
 \input dictionary
 
+\brokenpenalty=10000
+\widowpenalty=10000
+\clubpenalty=10000
