@@ -32,6 +32,10 @@ leftmargin=28mm,rightmargin=28mm,footskip=0pt]{zwpagelayout}
 \usepackage{stackengine}
 %\usepackage{showframe}
 
+%testing for kannada toc
+%using regular toc file for english
+\usepackage{titletoc}
+
 %\definecolor{ArchivalCream}{HTML}{f9f1f1} % A soft cream for your archive
 %\definecolor{ArchivalCream}{HTML}{F5EFE2} % A soft cream for your archive
 
@@ -111,6 +115,15 @@ leftmargin=28mm,rightmargin=28mm,footskip=0pt]{zwpagelayout}
 
 \setlength{\columnsep}{1.5cm}
 
+\makeatletter
+\renewcommand\chapter{\if@openright\cleardoublepage\else\clearpage\fi
+					\global\@topnum\z@
+                    \@afterindentfalse
+                    \secdef\@chapter\@schapter}
+
+\newcommand{\late@tocka}{tocka} % Extension for Kannada ToC
+\makeatother
+
 \newenvironment{sans}{\bgroup\selectlanguage{sanskrit}\setstretch{1.4}}{\par\egroup}
 \newenvironment{kan}{\bgroup\selectlanguage{kannada}\setstretch{1.4}}{\par\egroup}
 \newenvironment{eng}{\bgroup\selectlanguage{english}\setstretch{1.4}}{\par\egroup}
@@ -118,14 +131,58 @@ leftmargin=28mm,rightmargin=28mm,footskip=0pt]{zwpagelayout}
 \def\sansinline#1{{\setstretch{1.4}\textsanskrit{#1}}}
 \def\kaninline#1{{\setstretch{1.4}\textkannada{#1}}}
 \def\enginline#1{{\setstretch{1.4}\textenglish{#1}}}
+\newcommand{\kantoc}[1]{{\kannadafont #1}}
 
+\long\def\mainhead#1#2{\ifodd\value{page}%
+\preparehead{#1}%
+\else
+\null\clearpage
+\preparehead{#1}
+\fi
+\addcontentsline{toc}{chapter}{#2}
+\newpage
+}
+
+\long\def\preparehead#1{%
+\null\vfill
+\begin{eng}
+\begin{center}
+{\fontsize{40pt}{48pt}\fontseries{bx}\selectfont \color{deepmaroon}{#1}}	
+\end{center}
+\end{eng}
+\vfill
+}
 
 \def\booktitle#1{{\fontsize{36pt}{43.2pt}\fontseries{bx}\selectfont \color{deepmaroon}{#1}}}
 \def\titleinline#1{\centerline{\LARGE #1}}
 
-\def\Section#1{{\Large\bfseries\color{deepmaroon}{#1}}}
-\def\Subsection#1{{\large\bfseries #1}}
-\def\SSubsection#1{#1}
+\def\Section#1{{\Large\bfseries\color{deepmaroon}{#1}}%
+\iflanguage{kannada}{%
+    % If current language is Kannada, send to Kannada ToC
+    \addcontentsline{tocka}{section}{\kantoc{#1}}%
+  }{%
+    % If English (default), it's already handled by \section
+    \addcontentsline{toc}{section}{#1}%
+  }%
+}
+\def\Subsection#1{{\large\bfseries #1}%
+\iflanguage{kannada}{%
+    % If current language is Kannada, send to Kannada ToC
+    \addcontentsline{tocka}{subsection}{\kantoc{#1}}
+  }{%
+    % If English (default), it's already handled by \section
+    \addcontentsline{toc}{subsection}{#1}%
+  }%
+}
+\def\SSubsection#1{#1%
+\iflanguage{kannada}{%
+    % If current language is Kannada, send to Kannada ToC
+    \addcontentsline{tocka}{subsubsection}{\kantoc{#1}}
+  }{%
+    % If English (default), it's already handled by \section
+    \addcontentsline{toc}{subsubsection}{#1}
+  }%
+}
 
 \def\heading#1{{\large\color{deepmaroon}{\textbf{#1}}}}%
 \def\subheading#1{{\textbf{#1}}}%
@@ -162,6 +219,7 @@ leftmargin=28mm,rightmargin=28mm,footskip=0pt]{zwpagelayout}
 
 
 \makeatletter
+
 
 \def\@makeenmark{$^{\theenmark}$}
 

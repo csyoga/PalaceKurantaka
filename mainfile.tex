@@ -3,13 +3,25 @@
 \input macros
 \begin{document}
 
-\mainmatter
-%\input src/titlepage
+\frontmatter
+\begin{eng}
+\tableofcontents
+\end{eng}
 
 \newpage
 
-\thispagestyle{empty}
-~
+\begin{kan}
+\makeatletter
+\chapter*{ವಿಷಯ ಸೂಚಿ}
+\@starttoc{tocka}
+\makeatother
+\end{kan}
+\mainmatter
+%\input src/titlepage
+%\newpage
+
+%\thispagestyle{empty}
+%~
 %\begin{tikzpicture}[overlay, remember picture]
   %\node[inner sep=0pt, minimum width=\paperwidth, minimum height=\paperheight] at (current page.center) {
     %\includegraphics[width=\paperwidth, height=\paperheight, keepaspectratio]{1.jpg}
@@ -40,23 +52,26 @@
   %};
 %\end{tikzpicture}
 
-%\newpage
-
+\newpage
+\mainhead{Kapālakuraṇṭaka’s Manual\\[10pt] [of Haṭhayoga]}{Kapālakuraṇṭaka’s Manual [of Haṭhayoga]}
 \input src/preface
 \newpage
 \input src/asanas
 \newpage
+\ifodd\value{page}
+\null\thispagestyle{fancy}
+\newpage
+\fi
 \input src/shatkarma
+\newpage
+\mainhead{[Koraṇṭaka’s Manual on\\[10pt] Vajrolīmudrā]}{[Koraṇṭaka’s Manual on Vajrolīmudrā]}
 \newpage
 \input src/paddhati_II
 \newpage
-\input src/paddhati_III
-
+\mainhead{[Goraṇṭaka’s Manual on Yoga]}{[Goraṇṭaka’s Manual on Yoga]}
 \newpage
-
-
-
-~\vskip 1cm
+\input src/paddhati_III
+\newpage
 
 \begin{multicols}{2}
 \thispagestyle{empty}
