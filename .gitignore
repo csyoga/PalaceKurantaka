@@ -12,6 +12,7 @@ datafromclient/
 *.ent
 *.idx
 *.ind
+*.tocka
 rajaneeshdesings/
 images/
 new/
@@ -23,3 +24,10 @@ Kuraṇṭapaddhati\ I\ (originals)/
 Kuraṇṭapaddhati\ I\ (y\ cropped\ print\ ready\ PNG\ only)/
 "Kura\341\271\207\341\271\255apaddhati\ I\ (originals)/"
 "Kura\341\271\207\341\271\255apaddhati\ I\ (y\ cropped\ print\ ready\ PNG\ only)/"
+fonts/
+*.sh
+originalscans/
+HH corrections*
+from-jason/
+vidya-sankirtana-sudha-lahari/
+new-high-resolution-photos/
