@@ -3,20 +3,30 @@
 \input macros
 \begin{document}
 
-\frontmatter
-\begin{eng}
-\tableofcontents
-\end{eng}
+%~ \frontmatter
+%~ \begin{eng}
+%~ \tableofcontents
+%~ \end{eng}
 
-\newpage
+%~ \newpage
 
-\begin{kan}
-\makeatletter
-\chapter*{ವಿಷಯ ಸೂಚಿ}
-\@starttoc{tocka}
-\makeatother
-\end{kan}
+%~ \begin{kan}
+%~ \makeatletter
+%~ \chapter*{ವಿಷಯ ಸೂಚಿ}
+%~ \@starttoc{tocka}
+%~ \makeatother
+%~ \end{kan}
 \mainmatter
+
+%following are for testing
+
+\input src/dummy
+
+%testing lines ends here 
+
+\end{document}
+
+
 %\input src/titlepage
 %\newpage
 
@@ -54,6 +64,36 @@
 
 \newpage
 \mainhead{Kapālakuraṇṭaka’s Manual\\[10pt] [of Haṭhayoga]}{Kapālakuraṇṭaka’s Manual [of Haṭhayoga]}
+
+\newpage
+\ClearShipoutPictureBG % Stops the border/page number for this page
+\thispagestyle{empty}
+
+\begin{tikzpicture}[remember picture, overlay]
+    % Your "Full Page" content here
+    \node[anchor=center, inner sep=0pt] at (current page.center) {
+        \includegraphics[width=\paperwidth, height=\paperheight]{sample/1.jpg}
+    };
+\end{tikzpicture}
+
+\newpage
+
+\AddToShipoutPictureBG{%
+\begin{tikzpicture}[overlay, remember picture]
+  \node[inner sep=0pt, minimum width=\paperwidth, minimum height=\paperheight] at (current page.center) {
+    \includegraphics[width=21.8cm, height=27cm, keepaspectratio]{border2.png}
+  };
+\end{tikzpicture}%
+\begin{tikzpicture}[overlay, remember picture]
+    % Placing the page number at coordinate (3, -3) from the top-left corner
+    %\node[anchor=north west] at (3, -3) {Page \thepage};
+
+    % Placing the page number 2cm from the bottom-right corner
+    %\node[anchor=south east] at ($(current page.south) + (0.5cm, 1cm)$) {\thepage};
+    \node[anchor=south, yshift=1cm] at (current page.south) {\Large \enginline{\thepage}};
+\end{tikzpicture}
+}
+
 \input src/preface
 \newpage
 \input src/asanas
