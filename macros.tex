@@ -94,6 +94,13 @@ leftmargin=28mm,rightmargin=28mm,footskip=0pt]{zwpagelayout}
     BoldItalicFont=Junicode-BoldItalic.otf,
     Numbers=OldStyle]{Junicode-Regular.otf}
 
+\newfontfamily\montsefont[Path=fonts/,
+    Scale=1.1,
+    ItalicFont=Montserrat-BlackItalic.otf,
+    BoldFont=Montserrat-Bold.otf,
+    BoldItalicFont=Montserrat-BoldItalic.otf
+    ]{Montserrat-Black.otf}
+
 \newfontfamily\kannadafont[
 	Script=Kannada,
 	Scale=1.2,
@@ -147,7 +154,7 @@ leftmargin=28mm,rightmargin=28mm,footskip=0pt]{zwpagelayout}
 \null\vfill
 \begin{eng}
 \begin{center}
-{\fontsize{40pt}{48pt}\fontseries{bx}\selectfont \color{deepmaroon}{#1}}	
+{\montsefont\fontsize{16pt}{19.2pt}\fontseries{bx}\selectfont \color{black}{\uppercase{#1}}}	
 \end{center}
 \end{eng}
 \vfill
@@ -156,12 +163,14 @@ leftmargin=28mm,rightmargin=28mm,footskip=0pt]{zwpagelayout}
 \def\booktitle#1{{\fontsize{36pt}{43.2pt}\fontseries{bx}\selectfont \color{deepmaroon}{#1}}}
 \def\titleinline#1{\centerline{\LARGE #1}}
 
-\def\Section#1{{\Large\bfseries\color{deepmaroon}{#1}}%
+\def\Section#1{%
 \iflanguage{kannada}{%
     % If current language is Kannada, send to Kannada ToC
+    {\Large\bfseries\color{deepmaroon}{#1}}
     \addcontentsline{tocka}{section}{\kantoc{#1}}%
   }{%
     % If English (default), it's already handled by \section
+	{\montsefont\large\bfseries\color{deepmaroon}{#1}}
     \addcontentsline{toc}{section}{#1}%
   }%
 }
@@ -220,6 +229,16 @@ leftmargin=28mm,rightmargin=28mm,footskip=0pt]{zwpagelayout}
 
 \makeatletter
 
+\renewcommand\tableofcontents{%
+    \if@twocolumn
+      \@restonecoltrue\onecolumn
+    \else
+      \@restonecolfalse
+    \fi
+    {\montsefont\large\bfseries\color{black}{\MakeUppercase\contentsname}}%
+    \@starttoc{toc}%
+    \if@restonecol\twocolumn\fi
+    }
 
 \def\@makeenmark{$^{\theenmark}$}
 
@@ -287,6 +306,13 @@ leftmargin=28mm,rightmargin=28mm,footskip=0pt]{zwpagelayout}
 \enginline{\small {#2}}\\
 \kaninline{\small {#3}}
 \end{tabular}}
+\smallskip
+} 
+
+\long\def\asananamestmp#1#2#3{%
+\sansinline{{\small{#1}}}\hfill  
+\enginline{\small {#2}}\hfill 
+\kaninline{\small {#3}}
 \bigskip
 } 
 
