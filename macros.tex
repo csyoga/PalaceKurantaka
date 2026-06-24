@@ -2,6 +2,14 @@
 textheight=23.5cm,topmargin=30mm,botmargin=20.75mm,headsep=0mm,headheight=0mm,
 leftmargin=28mm,rightmargin=28mm,footskip=0pt]{zwpagelayout}
 
+%%try following
+%The standard book size closest to 15.4 cm \(\times \) 19 cm is Crown Quarto 
+%(6.84" \(\times \) 8.5" or 17.1 cm \(\times \) 21.6 cm), 
+%though it is slightly larger. In localized school supplies, 
+%it directly matches the Small Four-Line or Single-Line Notebook dimensions 
+%(usually 15.5 cm \(\times \) 19 cm) commonly used in Indi
+
+
 %~ \usepackage[
   %~ paperwidth=28.575cm,
   %~ paperheight=24.4602cm,
@@ -120,7 +128,7 @@ leftmargin=28mm,rightmargin=28mm,footskip=0pt]{zwpagelayout}
 	Scale=1.4
     ]{Adishila}
 
-\setlength{\columnsep}{1.5cm}
+\setlength{\columnsep}{1cm}
 
 \makeatletter
 \renewcommand\chapter{\if@openright\cleardoublepage\else\clearpage\fi
@@ -213,10 +221,17 @@ leftmargin=28mm,rightmargin=28mm,footskip=0pt]{zwpagelayout}
 \newcounter{anum}
 \def\asananum{\enginline{\theanum.}}
 \def\incanum{\stepcounter{anum}}
-\long\def\insimg#1{
+
+\long\def\insimgleaf#1{
 \makebox[\textwidth][c]{%
 \fclrbox{\includegraphics[width=\textwidth]{#1}}}
 }
+
+\newcommand{\insimg}[2][0.8]{%
+\makebox[\textwidth][c]{%
+\fclrbox{\includegraphics[width=#1\textwidth]{#2}}%
+}}
+
 \long\def\insimgspl#1{
 \makebox[\textwidth][c]{%
 \fclrbox{\includegraphics[width=0.92\textwidth]{#1}}}
@@ -289,7 +304,6 @@ leftmargin=28mm,rightmargin=28mm,footskip=0pt]{zwpagelayout}
 #1
 \end{enumerate}
 \end{eng}
-
 \begin{kan}
 \begin{enumerate}[leftmargin=*,labelindent=0pt]
 \item[\asananum]
@@ -310,10 +324,9 @@ leftmargin=28mm,rightmargin=28mm,footskip=0pt]{zwpagelayout}
 } 
 
 \long\def\asananamestmp#1#2#3{%
-\sansinline{{\small{#1}}}\hfill  
-\enginline{\small {#2}}\hfill 
-\kaninline{\small {#3}}
-\bigskip
+\hbox to\textwidth{\hfil\sansinline{{{\small #1}}}\hspace{0.5cm}
+\enginline{{\small #2}}\hspace{0.5cm}
+\kaninline{{\small #3}}\hfil}
 } 
 
 
