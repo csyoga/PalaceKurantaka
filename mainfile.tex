@@ -1,21 +1,25 @@
-\documentclass[10pt]{book}
+\documentclass[10pt,openany]{book}
 
 \input macros
 \begin{document}
 
 \frontmatter
+\begin{adjustwidth}{1.5cm}{1.5cm} 
 \begin{eng}
 \tableofcontents
 \end{eng}
+\end{adjustwidth}
 
 \newpage
 
+\begin{adjustwidth}{1.5cm}{1.5cm} 
 \begin{kan}
 \makeatletter
 \chapter*{ವಿಷಯ ಸೂಚಿ}
 \@starttoc{tocka}
 \makeatother
 \end{kan}
+\end{adjustwidth}
 \mainmatter
 
 %following are for testing
@@ -60,88 +64,43 @@
 %\end{tikzpicture}
 
 \newpage
+
 \mainhead{Kapālakuraṇṭaka’s Manual\\[10pt] [of Haṭhayoga]}{Kapālakuraṇṭaka’s Manual [of Haṭhayoga]}
 
 \newpage
-\ClearShipoutPictureBG % Stops the border/page number for this page
-\thispagestyle{empty}
 
-\begin{tikzpicture}[remember picture, overlay]
-    % Your "Full Page" content here
-    \node[anchor=center, inner sep=0pt] at (current page.center) {
-        \includegraphics[width=\paperwidth, height=\paperheight]{sample/046_folio_13_recto_43.jpg}
-    };
-\end{tikzpicture}
+\insertFullImage{046_folio_13_recto_43.jpg}
 
 \newpage
 
-\ClearShipoutPictureBG % Stops the border/page number for this page
-\thispagestyle{empty}
-
-\begin{tikzpicture}[remember picture, overlay]
-    % Your "Full Page" content here
-    \node[anchor=center, inner sep=0pt] at (current page.center) {
-        \includegraphics[width=\paperwidth, height=\paperheight]{sample/081_folio_21_verso_78.jpg}
-    };
-\end{tikzpicture}
+\insertFullImage{081_folio_21_verso_78.jpg}
 
 \newpage
 
-\AddToShipoutPictureBG{%
-\begin{tikzpicture}[overlay, remember picture]
-  \node[inner sep=0pt, minimum width=\paperwidth, minimum height=\paperheight] at (current page.center) {
-    \includegraphics[width=21.8cm, height=27cm, keepaspectratio]{border2.png}
-  };
-\end{tikzpicture}%
-\begin{tikzpicture}[overlay, remember picture]
-    % Placing the page number at coordinate (3, -3) from the top-left corner
-    %\node[anchor=north west] at (3, -3) {Page \thepage};
-
-    % Placing the page number 2cm from the bottom-right corner
-    %\node[anchor=south east] at ($(current page.south) + (0.5cm, 1cm)$) {\thepage};
-    \node[anchor=south, yshift=1cm] at (current page.south) {\Large \enginline{\thepage}};
-\end{tikzpicture}
-}
+\pagesWithBorder
 
 \input src/preface
-\newpage
-\ClearShipoutPictureBG % Stops the border/page number for this page
-\thispagestyle{empty}
 
-\begin{tikzpicture}[remember picture, overlay]
-    % Your "Full Page" content here
-    \node[anchor=center, inner sep=0pt] at (current page.center) {
-        \includegraphics[width=\paperwidth, height=\paperheight]{sample/018_folio_05_verso_14.jpg}
-    };
-\end{tikzpicture}
+\newpage
+
+\insertFullImage{018_folio_05_verso_14.jpg}
+
 \newpage
 \vfill
 
-\AddToShipoutPictureBG{%
-\begin{tikzpicture}[overlay, remember picture]
-  \node[inner sep=0pt, minimum width=\paperwidth, minimum height=\paperheight] at (current page.center) {
-    \includegraphics[width=21.8cm, height=27cm, keepaspectratio]{border2.png}
-  };
-\end{tikzpicture}%
-\begin{tikzpicture}[overlay, remember picture]
-    % Placing the page number at coordinate (3, -3) from the top-left corner
-    %\node[anchor=north west] at (3, -3) {Page \thepage};
+\pagesWithBorder
 
-    % Placing the page number 2cm from the bottom-right corner
-    %\node[anchor=south east] at ($(current page.south) + (0.5cm, 1cm)$) {\thepage};
-    \node[anchor=south, yshift=1cm] at (current page.south) {\Large \enginline{\thepage}};
-\end{tikzpicture}
-}
-
+~\vfill
 \begin{center}
 \begin{eng}
-\Subsection{Now, the Supine Postures.}
+Now, the Supine Postures.
 \end{eng}
 \begin{kan}
-\Subsection{ಈಗ, ಮಲಗಿಕೊಂಡು ಮಾಡುವ ಆಸನಗಳು}
+ಈಗ, ಮಲಗಿಕೊಂಡು ಮಾಡುವ ಆಸನಗಳು
 \end{kan}
 \end{center}
 \vfill
+
 \newpage
 \input src/asanas
 \newpage

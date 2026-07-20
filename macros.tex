@@ -38,6 +38,7 @@ leftmargin=28mm,rightmargin=28mm,footskip=0pt]{zwpagelayout}
 \usepackage{fancyhdr}
 \usepackage{enumitem}
 \usepackage{stackengine}
+\usepackage{changepage} 
 %\usepackage{showframe}
 
 %testing for kannada toc
@@ -131,7 +132,7 @@ leftmargin=28mm,rightmargin=28mm,footskip=0pt]{zwpagelayout}
 \setlength{\columnsep}{1cm}
 
 \makeatletter
-\renewcommand\chapter{\if@openright\cleardoublepage\else\clearpage\fi
+\renewcommand\chapter{%\if@openright\cleardoublepage\else\clearpage\fi
 					\global\@topnum\z@
                     \@afterindentfalse
                     \secdef\@chapter\@schapter}
@@ -234,7 +235,7 @@ leftmargin=28mm,rightmargin=28mm,footskip=0pt]{zwpagelayout}
 
 \long\def\insimgspl#1{
 \makebox[\textwidth][c]{%
-\fclrbox{\includegraphics[width=0.92\textwidth]{#1}}}
+\fclrbox{\includegraphics[width=\textwidth]{#1}}}
 }
 
 %%normalsize heading with color
@@ -251,10 +252,11 @@ leftmargin=28mm,rightmargin=28mm,footskip=0pt]{zwpagelayout}
       \@restonecolfalse
     \fi
     {\montsefont\large\bfseries\color{black}{\MakeUppercase\contentsname}}%
-    \@starttoc{toc}%
+    \@starttoc{toc}
     \if@restonecol\twocolumn\fi
     }
 
+\renewcommand{\@dotsep}{10000}
 \def\@makeenmark{$^{\theenmark}$}
 
 \renewcommand{\enoteheading}{%
@@ -356,6 +358,36 @@ leftmargin=28mm,rightmargin=28mm,footskip=0pt]{zwpagelayout}
 \def\Rline#1{\rightline{\enginline{\small #1}}}
 \def\tbf#1{\textbf{#1}}
 \def\tit#1{\textit{#1}}
+
+\long\def\insertFullImage#1{%
+\ClearShipoutPictureBG % Stops the border/page number for this page
+\thispagestyle{empty}
+
+\begin{tikzpicture}[remember picture, overlay]
+    % Your "Full Page" content here
+    \node[anchor=center, inner sep=0pt] at (current page.center) {
+        \includegraphics[width=\paperwidth, height=\paperheight]{sample/#1}
+    };
+\end{tikzpicture}
+}
+
+\long\def\pagesWithBorder{%
+\AddToShipoutPictureBG{%
+\begin{tikzpicture}[overlay, remember picture]
+  \node[inner sep=0pt, minimum width=\paperwidth, minimum height=\paperheight] at (current page.center) {
+    \includegraphics[width=21.8cm, height=27cm, keepaspectratio]{border2.png}
+  };
+\end{tikzpicture}%
+\begin{tikzpicture}[overlay, remember picture]
+    % Placing the page number at coordinate (3, -3) from the top-left corner
+    %\node[anchor=north west] at (3, -3) {Page \thepage};
+
+    % Placing the page number 2cm from the bottom-right corner
+    %\node[anchor=south east] at ($(current page.south) + (0.5cm, 1cm)$) {\thepage};
+    \node[anchor=south, yshift=1cm] at (current page.south) {\Large \enginline{\thepage}};
+\end{tikzpicture}
+}
+}
   
 \pagestyle{fancy}
 \fancyhf{}
@@ -372,3 +404,24 @@ leftmargin=28mm,rightmargin=28mm,footskip=0pt]{zwpagelayout}
 \brokenpenalty=10000
 \widowpenalty=10000
 \clubpenalty=10000
+
+
+\long\def\asanatmp#1{%
+\incanum%
+\begin{eng}
+\begin{enumerate}[leftmargin=*,labelindent=0pt]
+\item[\asananum]
+#1
+\end{enumerate}
+\end{eng}
+}
+
+\long\def\asanatmpk#1{%
+\incanum%
+\begin{kan}
+\begin{enumerate}[leftmargin=*,labelindent=0pt]
+\item[\asananum]
+#1
+\end{enumerate}
+\end{kan}
+}
