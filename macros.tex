@@ -172,33 +172,35 @@ leftmargin=28mm,rightmargin=28mm,footskip=0pt]{zwpagelayout}
 \def\booktitle#1{{\fontsize{36pt}{43.2pt}\fontseries{bx}\selectfont \color{deepmaroon}{#1}}}
 \def\titleinline#1{\centerline{\LARGE #1}}
 
-\def\Section#1{%
-\iflanguage{kannada}{%
-    % If current language is Kannada, send to Kannada ToC
-    {\Large\bfseries\color{deepmaroon}{#1}}
-    \addcontentsline{tocka}{section}{\kantoc{#1}}%
+\newcommand{\Section}[2][]{%
+  \iflanguage{kannada}{%
+    % If current language is Kannada
+    {\Large\bfseries\color{deepmaroon}{#2}}%
+    \addcontentsline{tocka}{section}{\kantoc{\if\relax\detokenize{#1}\relax #2\else #1\fi}}%
   }{%
-    % If English (default), it's already handled by \section
-	{\montsefont\large\bfseries\color{deepmaroon}{#1}}
-    \addcontentsline{toc}{section}{#1}%
+    % If English (default)
+    {\montsefont\large\bfseries\color{deepmaroon}{#2}}%
+    \addcontentsline{toc}{section}{\if\relax\detokenize{#1}\relax #2\else #1\fi}%
   }%
 }
-\def\Subsection#1{{\large\bfseries #1}%
-\iflanguage{kannada}{%
+\newcommand{\Subsection}[2][]{%
+  {\large\bfseries #2}%
+  \iflanguage{kannada}{%
     % If current language is Kannada, send to Kannada ToC
-    \addcontentsline{tocka}{subsection}{\kantoc{#1}}
+    \addcontentsline{tocka}{subsection}{\kantoc{\if\relax\detokenize{#1}\relax #2\else #1\fi}}%
   }{%
-    % If English (default), it's already handled by \section
-    \addcontentsline{toc}{subsection}{#1}%
+    % If English (default), send to standard ToC
+    \addcontentsline{toc}{subsection}{\if\relax\detokenize{#1}\relax #2\else #1\fi}%
   }%
 }
-\def\SSubsection#1{#1%
-\iflanguage{kannada}{%
+\newcommand{\SSubsection}[2][]{%
+  #2%
+  \iflanguage{kannada}{%
     % If current language is Kannada, send to Kannada ToC
-    \addcontentsline{tocka}{subsubsection}{\kantoc{#1}}
+    \addcontentsline{tocka}{subsubsection}{\kantoc{\if\relax\detokenize{#1}\relax #2\else #1\fi}}%
   }{%
-    % If English (default), it's already handled by \section
-    \addcontentsline{toc}{subsubsection}{#1}
+    % If English (default), send to standard ToC
+    \addcontentsline{toc}{subsubsection}{\if\relax\detokenize{#1}\relax #2\else #1\fi}%
   }%
 }
 
@@ -255,12 +257,14 @@ leftmargin=28mm,rightmargin=28mm,footskip=0pt]{zwpagelayout}
 \makeatletter
 
 \renewcommand\tableofcontents{%
+    \vspace*{70\p@}%
     \if@twocolumn
       \@restonecoltrue\onecolumn
     \else
       \@restonecolfalse
     \fi
-    {\montsefont\large\bfseries\color{black}{\MakeUppercase\contentsname}}%
+    {\montsefont\LARGE\bfseries\color{black}{\MakeUppercase\contentsname}}%
+    \vskip 40\p@%
     \@starttoc{toc}
     \if@restonecol\twocolumn\fi
     }
@@ -354,7 +358,7 @@ leftmargin=28mm,rightmargin=28mm,footskip=0pt]{zwpagelayout}
 
     % Placing the page number 2cm from the bottom-right corner
     %\node[anchor=south east] at ($(current page.south) + (0.5cm, 1cm)$) {\thepage};
-    \node[anchor=south, yshift=1cm] at (current page.south) {\Large \enginline{\thepage}};
+    \node[anchor=south, yshift=1cm] at (current page.south) {\enginline{\thepage}};
 \end{tikzpicture}
 }
 
@@ -393,7 +397,7 @@ leftmargin=28mm,rightmargin=28mm,footskip=0pt]{zwpagelayout}
 
     % Placing the page number 2cm from the bottom-right corner
     %\node[anchor=south east] at ($(current page.south) + (0.5cm, 1cm)$) {\thepage};
-    \node[anchor=south, yshift=1cm] at (current page.south) {\Large \enginline{\thepage}};
+    \node[anchor=south, yshift=1cm] at (current page.south) {\enginline{\thepage}};
 \end{tikzpicture}
 }
 }
