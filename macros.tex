@@ -172,6 +172,16 @@ leftmargin=28mm,rightmargin=28mm,footskip=0pt]{zwpagelayout}
 \def\booktitle#1{{\fontsize{36pt}{43.2pt}\fontseries{bx}\selectfont \color{deepmaroon}{#1}}}
 \def\titleinline#1{\centerline{\LARGE #1}}
 
+\long\def\prtheading#1{
+  \iflanguage{kannada}{%
+    % If current language is Kannada
+    {\LARGE\bfseries{#1}}%
+  }{%
+    % If English (default)
+    {\montsefont\LARGE\bfseries{#1}}%
+  }%
+}
+
 \newcommand{\Section}[2][]{%
   \iflanguage{kannada}{%
     % If current language is Kannada
@@ -255,6 +265,9 @@ leftmargin=28mm,rightmargin=28mm,footskip=0pt]{zwpagelayout}
 }
 
 \makeatletter
+
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{4}
 
 \renewcommand\tableofcontents{%
     \vspace*{70\p@}%
