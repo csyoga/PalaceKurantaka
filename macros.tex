@@ -23,7 +23,7 @@ leftmargin=28mm,rightmargin=28mm,footskip=0pt]{zwpagelayout}
   %~ includefoot,
   %~ showcrop,
 %~ ]{geometry}
-
+\usepackage{changepage}
 \usepackage{polyglossia}
 \usepackage{xltxtra}
 \usepackage{fontspec}
@@ -44,6 +44,7 @@ leftmargin=28mm,rightmargin=28mm,footskip=0pt]{zwpagelayout}
 %testing for kannada toc
 %using regular toc file for english
 \usepackage{titletoc}
+\usepackage{xparse}
 
 %\definecolor{ArchivalCream}{HTML}{f9f1f1} % A soft cream for your archive
 %\definecolor{ArchivalCream}{HTML}{F5EFE2} % A soft cream for your archive
@@ -57,7 +58,7 @@ leftmargin=28mm,rightmargin=28mm,footskip=0pt]{zwpagelayout}
 %\pagecolor{ArchivalCream}
 
 %\definecolor{deepmaroon}{RGB}{193,154,107}
-\definecolor{deepmaroon}{RGB}{181,143,95}
+\definecolor{deepmaroon}{RGB}{43,101,124}
 \definecolor{markcolor}{RGB}{181,143,95}
 \definecolor{bordercolor}{RGB}{215, 75, 15}
 %~ \definecolor{plum}{RGB}{153, 101, 21}
@@ -110,9 +111,15 @@ leftmargin=28mm,rightmargin=28mm,footskip=0pt]{zwpagelayout}
     BoldItalicFont=Montserrat-BoldItalic.otf
     ]{Montserrat-Black.otf}
 
+\newfontfamily\cormorant[Path=fonts/,
+    ItalicFont=CormorantGaramond-Italic.ttf,
+    BoldFont=CormorantGaramond-Bold.ttf,
+    BoldItalicFont=CormorantGaramond-BoldItalic.ttf
+    ]{CormorantGaramond-Regular.ttf}
+
 \newfontfamily\kannadafont[
 	Script=Kannada,
-	Scale=1.2,
+	Scale=1.1,
 	BoldFont=SHREE-KAN-OTF-0850-Bold,
 	ItalicFont=SHREE-KAN-OTF-0850-Italic,
 	BoldItalicFont=SHREE-KAN-OTF-0850-Bold-Italic,
@@ -150,57 +157,74 @@ leftmargin=28mm,rightmargin=28mm,footskip=0pt]{zwpagelayout}
 \newcommand{\kantoc}[1]{{\kannadafont #1}}
 
 \long\def\mainhead#1#2{\ifodd\value{page}%
-\preparehead{#1}%
-\else
-\null\clearpage
-\preparehead{#1}
-\fi
-\addcontentsline{toc}{chapter}{#2}
-\newpage
+\preparehead{#1}{#2}%
+\else%
+\null\clearpage%
+\preparehead{#1}{#2}%
+\fi%
+\addcontentsline{toc}{chapter}{#1}%
+\addcontentsline{tocka}{chapter}{\kantoc{#2}}%
+\newpage%
 }
 
-\long\def\preparehead#1{%
-\null\vfill
-\begin{eng}
-\begin{center}
-{\montsefont\fontsize{16pt}{19.2pt}\fontseries{bx}\selectfont \color{black}{\uppercase{#1}}}	
-\end{center}
-\end{eng}
-\vfill
+
+\long\def\preparehead#1#2{%
+\vspace*{\fill}
+    {\selectlanguage{english}\cormorant\fontsize{24pt}{28.8pt}\selectfont\color{deepmaroon}{\uppercase{\centerline{#1}}}}%
+    {\selectlanguage{kannada}\fontsize{24pt}{28.8pt}\selectfont\color{deepmaroon}{\centerline{#2}}}%
+\vspace*{\fill}
 }
 
-\def\booktitle#1{{\fontsize{36pt}{43.2pt}\fontseries{bx}\selectfont \color{deepmaroon}{#1}}}
-\def\titleinline#1{\centerline{\LARGE #1}}
-
-\long\def\prtheading#1{
+\def\booktitle#1{%
   \iflanguage{kannada}{%
     % If current language is Kannada
-    {\LARGE\bfseries{#1}}%
+    {\begin{kan}\fontsize{24pt}{28.8pt}\selectfont\color{deepmaroon}{#1}\end{kan}}%
   }{%
     % If English (default)
-    {\montsefont\LARGE\bfseries{#1}}%
+    {\begin{eng}\cormorant\fontsize{24pt}{28.8pt}\selectfont\color{deepmaroon}{\uppercase{#1}}\end{eng}}%
+  }%
+}
+\def\titleinline#1{\centerline{\LARGE #1}}
+
+
+\newcommand{\prtheading}[2][]{%
+  \iflanguage{kannada}{%
+    % If current language is Kannada
+    {\fontsize{18pt}{21.6pt}\selectfont\color{deepmaroon}{#2}}%
+    \addcontentsline{tocka}{subsection}{\kantoc{\if\relax\detokenize{#1}\relax #2\else #1\fi}}%
+  }{%
+    % If English (default)
+    {\cormorant\fontsize{18pt}{21.6pt}\selectfont\color{deepmaroon}{#2}}%
+    \addcontentsline{toc}{subsection}{\if\relax\detokenize{#1}\relax #2\else #1\fi}%
   }%
 }
 
 \newcommand{\Section}[2][]{%
   \iflanguage{kannada}{%
     % If current language is Kannada
-    {\Large\bfseries\color{deepmaroon}{#2}}%
+    {\fontsize{18pt}{21.6pt}\selectfont\color{deepmaroon}{#2}}%
     \addcontentsline{tocka}{section}{\kantoc{\if\relax\detokenize{#1}\relax #2\else #1\fi}}%
   }{%
     % If English (default)
-    {\montsefont\large\bfseries\color{deepmaroon}{#2}}%
+    {\cormorant\fontsize{18pt}{21.6pt}\selectfont\color{deepmaroon}{#2}}%
     \addcontentsline{toc}{section}{\if\relax\detokenize{#1}\relax #2\else #1\fi}%
   }%
 }
-\newcommand{\Subsection}[2][]{%
-  {\large\bfseries #2}%
+\NewDocumentCommand{\Subsection}{ s o m }{%
   \iflanguage{kannada}{%
-    % If current language is Kannada, send to Kannada ToC
-    \addcontentsline{tocka}{subsection}{\kantoc{\if\relax\detokenize{#1}\relax #2\else #1\fi}}%
+    % --- KANNADA LANGUAGE ---
+    {\fontsize{14pt}{16.8pt}\selectfont\color{deepmaroon}{#3}}%
+    \IfBooleanF{#1}{%
+      % Add to Kannada ToC only if UNSTARRED
+      \addcontentsline{tocka}{subsection}{\kantoc{\IfValueTF{#2}{#2}{#3}}}%
+    }%
   }{%
-    % If English (default), send to standard ToC
-    \addcontentsline{toc}{subsection}{\if\relax\detokenize{#1}\relax #2\else #1\fi}%
+    % --- ENGLISH / DEFAULT LANGUAGE ---
+    {\cormorant\fontsize{14pt}{16.8pt}\selectfont\color{deepmaroon}{#3}}%
+    \IfBooleanF{#1}{%
+      % Add to English ToC only if UNSTARRED
+      \addcontentsline{toc}{subsection}{\IfValueTF{#2}{#2}{#3}}%
+    }%
   }%
 }
 \newcommand{\SSubsection}[2][]{%
@@ -264,10 +288,22 @@ leftmargin=28mm,rightmargin=28mm,footskip=0pt]{zwpagelayout}
   \end{minipage}%
 }
 
+
+
+
 \makeatletter
 
-\setcounter{secnumdepth}{4}
-\setcounter{tocdepth}{4}
+\def\@makeschapterhead#1{%
+  \vspace*{70\p@}%
+  {\parindent \z@ \centering
+    \normalfont
+    \interlinepenalty\@M
+    \begin{kan}\fontsize{24pt}{28.8pt}\selectfont\color{deepmaroon}{#1}\end{kan}\par\nobreak
+    \vskip 40\p@
+  }}
+
+%~ \setcounter{secnumdepth}{4}
+%~ \setcounter{tocdepth}{4}
 
 \renewcommand\tableofcontents{%
     \vspace*{70\p@}%
@@ -276,7 +312,7 @@ leftmargin=28mm,rightmargin=28mm,footskip=0pt]{zwpagelayout}
     \else
       \@restonecolfalse
     \fi
-    {\montsefont\LARGE\bfseries\color{black}{\MakeUppercase\contentsname}}%
+    {\hfill\cormorant\fontsize{24pt}{28.8pt}\selectfont\color{deepmaroon}{\MakeUppercase\contentsname}\hfill}%
     \vskip 40\p@%
     \@starttoc{toc}
     \if@restonecol\twocolumn\fi

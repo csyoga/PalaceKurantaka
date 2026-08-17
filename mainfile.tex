@@ -3,17 +3,28 @@
 \input macros
 \begin{document}
 
-
 \frontmatter
 
+{% Start local scope for ToC
+  % Reduce text height by 6cm (e.g., if full page is 21cm, content area becomes 15cm)
+\addtolength{\topmargin}{1.5cm}%
+\changetext{-3cm}{}{}{}{}
 \begin{adjustwidth}{1.5cm}{1.5cm} 
 \begin{eng}
 \tableofcontents
 \end{eng}
 \end{adjustwidth}
+\par % 2. Force paragraph completion
+  \vfil % 3. Push remaining space to the bottom
+  \clearpage % 4. Force shipout of the final page INSIDE the scope
+}% Margins and text height automatically restore here
 
 \newpage
 
+{% Start local scope for ToC
+  % Reduce text height by 6cm (e.g., if full page is 21cm, content area becomes 15cm)
+\addtolength{\topmargin}{1.5cm}%
+\changetext{-3cm}{}{}{}{}
 \begin{adjustwidth}{1.5cm}{1.5cm} 
 \begin{kan}
 \makeatletter
@@ -22,6 +33,11 @@
 \makeatother
 \end{kan}
 \end{adjustwidth}
+\par % 2. Force paragraph completion
+  \vfil % 3. Push remaining space to the bottom
+  \clearpage % 4. Force shipout of the final page INSIDE the scope
+}% Margins and text height automatically restore here
+
 \mainmatter
 
 %following are for testing
@@ -67,7 +83,8 @@
 
 \newpage
 
-\mainhead{Kapālakuraṇṭaka’s Manual\\[10pt] [of Haṭhayoga]}{Kapālakuraṇṭaka’s Manual [of Haṭhayoga]}
+
+\mainhead{KORAṆṬAKAPADDHATI I}{ಕೊರಂಟಕಪದ್ಧತಿ ೧}
 
 \newpage
 
@@ -92,15 +109,14 @@
 
 \pagesWithBorder
 
-~\vfill
-\begin{center}
+\null\vfill
+{\leftskip=30pt
 \begin{eng}
-\prtheading{Now, the Supine Postures}
+\prtheading[Supine Postures]{Now, the Supine Postures}
 \end{eng}
 \begin{kan}
-\prtheading{ಈಗ, ಮಲಗಿಕೊಂಡು ಮಾಡುವ ಆಸನಗಳು}
-\end{kan}
-\end{center}
+\prtheading[ಮಲಗಿಕೊಂಡು ಮಾಡುವ ಆಸನಗಳು]{ಈಗ, ಮಲಗಿಕೊಂಡು ಮಾಡುವ ಆಸನಗಳು}
+\end{kan}\par}
 \vfill
 
 \newpage
@@ -112,11 +128,17 @@
 \fi
 \input src/shatkarma
 \newpage
-\mainhead{[Koraṇṭaka’s Manual on\\[10pt] Vajrolīmudrā]}{Koraṇṭaka’s Manual on Vajrolīmudrā}
+
+\null\vfil
+\mainhead{KORAṆṬAKAPADDHATI II}{ಕೊರಂಟಕಪದ್ಧತಿ ೨}
+\vfill
+
 \newpage
 \input src/paddhati_II
 \newpage
-\mainhead{[Goraṇṭaka’s Manual on Yoga]}{Goraṇṭaka’s Manual on Yoga}
+\null\vfil
+\mainhead{KORAṆṬAKAPADDHATI III}{ಕೊರಂಟಕಪದ್ಧತಿ ೩}
+\vfill
 \newpage
 \input src/paddhati_III
 \newpage
