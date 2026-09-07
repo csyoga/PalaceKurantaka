@@ -1,6 +1,32 @@
-\usepackage[papersize={24.4602cm,28.575cm},textwidth=18.9cm,
-textheight=23.5cm,topmargin=30mm,botmargin=20.75mm,headsep=0mm,headheight=0mm,
-leftmargin=28mm,rightmargin=28mm,footskip=0pt]{zwpagelayout}
+%old setting
+%~ \usepackage[papersize={24.4602cm,28.575cm},textwidth=18.9cm,
+%~ textheight=23.5cm,topmargin=30mm,botmargin=20.75mm,headsep=0mm,headheight=0mm,
+%~ leftmargin=28mm,rightmargin=28mm,footskip=0pt]{zwpagelayout}
+%border size: 21.806 x 27.034 
+
+%for print cream color paper
+%color for heading changed
+%now paper size could be 11 in x 8.5 in or 12 in x 9 in 
+%new setting
+%~ \usepackage[papersize={27.9cm,21.6cm},textwidth=22cm,
+%~ textheight=17.26cm,topmargin=25.2mm,botmargin=18.2mm,headsep=0mm,headheight=0mm,
+%~ leftmargin=29.5mm,rightmargin=29.5mm,footskip=0pt]{zwpagelayout}
+%border size: 24.871 x 20.439 
+
+%4169E1
+%27.9cm x 21.6cm
+%textwidth=21.54x
+%textheight=17.76cm
+%topmargin=1.92cm
+%botmargin=1.92cm
+%leftmargin=3.18cm
+%rightmargin=3.18cm
+
+%latest setting
+%border size 27.17cm x 21.63cm
+\usepackage[papersize={30.48cm,22.86cm},textwidth=24.03cm,
+textheight=18.295cm,topmargin=25.92mm,botmargin=20mm,headsep=0mm,headheight=0mm,
+leftmargin=32.25mm,rightmargin=32.25mm,footskip=0pt]{zwpagelayout}
 
 %%try following
 %The standard book size closest to 15.4 cm \(\times \) 19 cm is Crown Quarto 
@@ -38,7 +64,8 @@ leftmargin=28mm,rightmargin=28mm,footskip=0pt]{zwpagelayout}
 \usepackage{fancyhdr}
 \usepackage{enumitem}
 \usepackage{stackengine}
-\usepackage{changepage} 
+\usepackage{changepage}
+\usepackage{paracol} 
 %\usepackage{showframe}
 
 %testing for kannada toc
@@ -57,8 +84,15 @@ leftmargin=28mm,rightmargin=28mm,footskip=0pt]{zwpagelayout}
 %\definecolor{ArchivalCream}{HTML}{F4EFE7} % A soft cream for your archive
 %\pagecolor{ArchivalCream}
 
+%~ \definecolor{creamwhite}{RGB}{252,251,244}
+%~ \pagecolor{creamwhite}
 %\definecolor{deepmaroon}{RGB}{193,154,107}
-\definecolor{deepmaroon}{RGB}{43,101,124}
+%\definecolor{deepmaroon}{RGB}{43,101,124}
+%\definecolor{deepmaroon_c}{RGB}{65,105,225}
+%\definecolor{deepmaroon}{RGB}{0,43,190}
+\definecolor{deepmaroon}{RGB}{0,22,120}
+%\definecolor{deepmaroon}{RGB}{48,102,224}
+%\definecolor{deepmaroon}{RGB}{232,66,49}
 \definecolor{markcolor}{RGB}{181,143,95}
 \definecolor{bordercolor}{RGB}{215, 75, 15}
 %~ \definecolor{plum}{RGB}{153, 101, 21}
@@ -119,7 +153,7 @@ leftmargin=28mm,rightmargin=28mm,footskip=0pt]{zwpagelayout}
 
 \newfontfamily\kannadafont[
 	Script=Kannada,
-	Scale=1.1,
+	Scale=1.2,
 	BoldFont=SHREE-KAN-OTF-0850-Bold,
 	ItalicFont=SHREE-KAN-OTF-0850-Italic,
 	BoldItalicFont=SHREE-KAN-OTF-0850-Bold-Italic,
@@ -175,27 +209,60 @@ leftmargin=28mm,rightmargin=28mm,footskip=0pt]{zwpagelayout}
 \vspace*{\fill}
 }
 
+%~ \def\booktitle#1{%
+  %~ \iflanguage{kannada}{%
+    %~ % If current language is Kannada
+    %~ {\begin{kan}\fontsize{24pt}{28.8pt}\selectfont\color{deepmaroon}{#1}\end{kan}}%
+  %~ }{%
+    %~ % If English (default)
+    %~ {\begin{eng}\cormorant\fontsize{24pt}{28.8pt}\selectfont\color{deepmaroon}{\uppercase{#1}}\end{eng}}%
+  %~ }%
+%~ }
+
 \def\booktitle#1{%
   \iflanguage{kannada}{%
-    % If current language is Kannada
+    % --- KANNADA ---
     {\begin{kan}\fontsize{24pt}{28.8pt}\selectfont\color{deepmaroon}{#1}\end{kan}}%
   }{%
-    % If English (default)
-    {\begin{eng}\cormorant\fontsize{24pt}{28.8pt}\selectfont\color{deepmaroon}{\uppercase{#1}}\end{eng}}%
+    \iflanguage{sanskrit}{%
+      % --- SANSKRIT ---
+      {\begin{sans}\sanskritfont\fontsize{24pt}{28.8pt}\selectfont\color{deepmaroon}{#1}\end{sans}}%
+    }{%
+      % --- ENGLISH (Default) ---
+      {\begin{eng}\cormorant\fontsize{24pt}{28.8pt}\selectfont\color{deepmaroon}{\uppercase{#1}}\end{eng}}%
+    }%
   }%
 }
+
 \def\titleinline#1{\centerline{\LARGE #1}}
 
 
+%~ \newcommand{\prtheading}[2][]{%
+  %~ \iflanguage{kannada}{%
+    %~ % If current language is Kannada
+    %~ {\fontsize{18pt}{21.6pt}\selectfont\color{deepmaroon}{#2}}%
+    %~ \addcontentsline{tocka}{subsection}{\kantoc{\if\relax\detokenize{#1}\relax #2\else #1\fi}}%
+  %~ }{%
+    %~ % If English (default)
+    %~ {\cormorant\fontsize{18pt}{21.6pt}\selectfont\color{deepmaroon}{#2}}%
+    %~ \addcontentsline{toc}{subsection}{\if\relax\detokenize{#1}\relax #2\else #1\fi}%
+  %~ }%
+%~ }
+
 \newcommand{\prtheading}[2][]{%
   \iflanguage{kannada}{%
-    % If current language is Kannada
+    % --- KANNADA ---
     {\fontsize{18pt}{21.6pt}\selectfont\color{deepmaroon}{#2}}%
     \addcontentsline{tocka}{subsection}{\kantoc{\if\relax\detokenize{#1}\relax #2\else #1\fi}}%
   }{%
-    % If English (default)
-    {\cormorant\fontsize{18pt}{21.6pt}\selectfont\color{deepmaroon}{#2}}%
-    \addcontentsline{toc}{subsection}{\if\relax\detokenize{#1}\relax #2\else #1\fi}%
+    \iflanguage{sanskrit}{%
+      % --- SANSKRIT --- (No \addcontentsline per your request)
+      {\fontsize{18pt}{21.6pt}\selectfont\color{deepmaroon}{#2}}%
+    }{%
+      % --- ENGLISH (Default) ---
+      {\cormorant\fontsize{18pt}{21.6pt}\selectfont\color{deepmaroon}{#2}}%
+      \addcontentsline{toc}{subsection}{\if\relax\detokenize{#1}\relax #2\else #1\fi}%
+    }%
   }%
 }
 
@@ -256,12 +323,13 @@ leftmargin=28mm,rightmargin=28mm,footskip=0pt]{zwpagelayout}
 \def\endimg{\vskip 5mm}
 
 \newcounter{anum}
-\def\asananum{\enginline{\theanum.}}
+\globalcounter{anum}
 \def\incanum{\stepcounter{anum}}
+\def\asananum{\enginline{\theanum.}}
 
 \long\def\insimgleaf#1{
 \makebox[\textwidth][c]{%
-\fclrbox{\includegraphics[width=\textwidth]{#1}}}
+\fclrbox{\includegraphics[width=0.88\textwidth]{#1}}}
 }
 
 \newcommand{\insimg}[2][0.8]{%
@@ -269,10 +337,20 @@ leftmargin=28mm,rightmargin=28mm,footskip=0pt]{zwpagelayout}
 \fclrbox{\includegraphics[width=#1\textwidth]{#2}}%
 }}
 
-\long\def\insimgspl#1{
+\newcommand{\insimgcol}[1]{%
+\makebox[\columnwidth][c]{%
+\fclrbox{\includegraphics[width=\columnwidth]{#1}}%
+}}
+
+\newcommand{\insimgspl}[2][0.96]{%
 \makebox[\textwidth][c]{%
-\fclrbox{\includegraphics[width=\textwidth]{#1}}}
-}
+\fclrbox{\includegraphics[width=#1\textwidth]{#2}}%
+}}
+
+%~ \long\def\insimgspl#1{%
+%~ \makebox[\textwidth][c]{%
+%~ \fclrbox{\includegraphics[width=#1\textwidth]{#1}}}%
+%~ }
 
 %%normalsize heading with color
 \def\headingnsize#1{{\color{deepmaroon}{\textbf{#1}}}}
@@ -294,7 +372,7 @@ leftmargin=28mm,rightmargin=28mm,footskip=0pt]{zwpagelayout}
 \makeatletter
 
 \def\@makeschapterhead#1{%
-  \vspace*{70\p@}%
+  %\vspace*{70\p@}%
   {\parindent \z@ \centering
     \normalfont
     \interlinepenalty\@M
@@ -306,7 +384,7 @@ leftmargin=28mm,rightmargin=28mm,footskip=0pt]{zwpagelayout}
 %~ \setcounter{tocdepth}{4}
 
 \renewcommand\tableofcontents{%
-    \vspace*{70\p@}%
+    %\vspace*{70\p@}%
     \if@twocolumn
       \@restonecoltrue\onecolumn
     \else
@@ -360,21 +438,19 @@ leftmargin=28mm,rightmargin=28mm,footskip=0pt]{zwpagelayout}
   %~ \fi}
 
 \long\def\asana#1#2{%
-\incanum%
-\begin{multicols}{2}
+\refstepcounter{anum}
 \begin{eng}
-\begin{enumerate}[leftmargin=*,labelindent=0pt]
+\begin{enumerate}[leftmargin=*,labelindent=0pt,nosep]
 \item[\asananum]
 #1
 \end{enumerate}
 \end{eng}
 \begin{kan}
-\begin{enumerate}[leftmargin=*,labelindent=0pt]
+\begin{enumerate}[leftmargin=*,labelindent=0pt,nosep]
 \item[\asananum]
 #2
 \end{enumerate}
 \end{kan}
-\end{multicols}
 }
 
 \long\def\asananames#1#2#3{%
@@ -388,17 +464,23 @@ leftmargin=28mm,rightmargin=28mm,footskip=0pt]{zwpagelayout}
 } 
 
 \long\def\asananamestmp#1#2#3{%
-\hbox to\textwidth{\hfil\sansinline{{{\small #1}}}\hspace{0.5cm}
-\enginline{{\small #2}}\hspace{0.5cm}
-\kaninline{{\small #3}}\hfil}
+\hbox to\columnwidth{\hfil\sansinline{{{#1}}}\hfill
+\enginline{{#2}}\hfill
+\kaninline{{#3}}\hfil}
 } 
+
+\long\def\asananamestmpscale#1#2#3#4{%
+\centerline{\hbox to#4\columnwidth{\hfil\sansinline{{{#1}}}\hfill
+\enginline{{#2}}\hfill
+\kaninline{{#3}}\hfil}
+}}
 
 
 % Add the Border to Every Page
 \AddToShipoutPictureBG{%
 \begin{tikzpicture}[overlay, remember picture]
   \node[inner sep=0pt, minimum width=\paperwidth, minimum height=\paperheight] at (current page.center) {
-    \includegraphics[width=21.8cm, height=27cm, keepaspectratio]{border2.png}
+    \includegraphics[width=27.17cm, height=21.63cm, keepaspectratio]{border4.png}
   };
 \end{tikzpicture}%
 \begin{tikzpicture}[overlay, remember picture]
@@ -407,14 +489,14 @@ leftmargin=28mm,rightmargin=28mm,footskip=0pt]{zwpagelayout}
 
     % Placing the page number 2cm from the bottom-right corner
     %\node[anchor=south east] at ($(current page.south) + (0.5cm, 1cm)$) {\thepage};
-    \node[anchor=south, yshift=1cm] at (current page.south) {\enginline{\thepage}};
+    \node[anchor=south, yshift=0.85cm] at (current page.south) {\enginline{\thepage}};
 \end{tikzpicture}
 }
 
 \def\engname#1{\textbf{#1}}
 \def\engiast#1{\textit{#1}}
 \def\insmark#1#2#3{\stackon[#1]{#3}{\hspace{#2}\color{markcolor}{$\lnot$}}}  
-\def\krnt{\textit{Kapālakuraṇṭakapaddhati}}
+\def\krnt{\textit{Koraṇṭakapaddhati I}}
 \def\RE{\textit{recto}}
 \def\VE{\textit{verso}}
 \def\Rline#1{\rightline{\enginline{\small #1}}}
@@ -437,7 +519,7 @@ leftmargin=28mm,rightmargin=28mm,footskip=0pt]{zwpagelayout}
 \AddToShipoutPictureBG{%
 \begin{tikzpicture}[overlay, remember picture]
   \node[inner sep=0pt, minimum width=\paperwidth, minimum height=\paperheight] at (current page.center) {
-    \includegraphics[width=21.8cm, height=27cm, keepaspectratio]{border2.png}
+    \includegraphics[width=27.17cm, height=21.63cm, keepaspectratio]{border4.png}
   };
 \end{tikzpicture}%
 \begin{tikzpicture}[overlay, remember picture]
@@ -446,7 +528,7 @@ leftmargin=28mm,rightmargin=28mm,footskip=0pt]{zwpagelayout}
 
     % Placing the page number 2cm from the bottom-right corner
     %\node[anchor=south east] at ($(current page.south) + (0.5cm, 1cm)$) {\thepage};
-    \node[anchor=south, yshift=1cm] at (current page.south) {\enginline{\thepage}};
+    \node[anchor=south, yshift=0.85cm] at (current page.south) {\enginline{\thepage}};
 \end{tikzpicture}
 }
 }
