@@ -190,6 +190,15 @@ leftmargin=32.25mm,rightmargin=32.25mm,footskip=0pt]{zwpagelayout}
 \def\enginline#1{{\setstretch{1.4}\textenglish{#1}}}
 \newcommand{\kantoc}[1]{{\kannadafont #1}}
 
+\newenvironment{fullpagebox}[4][c]%
+  {%
+    \noindent% Prevents unexpected horizontal indents
+    \begin{minipage}[#1][#2][#3]{#4}%
+  }%
+  {%
+    \end{minipage}%
+  }
+
 \long\def\mainhead#1#2{\ifodd\value{page}%
 \preparehead{#1}{#2}%
 \else%
@@ -202,10 +211,10 @@ leftmargin=32.25mm,rightmargin=32.25mm,footskip=0pt]{zwpagelayout}
 
 
 \long\def\preparehead#1#2{%
-\begin{minipage}[c][\textheight][c]{\textwidth}%
+\begin{fullpagebox}{\textheight}{c}{\textwidth}%
 {\selectlanguage{english}\cormorant\fontsize{24pt}{28.8pt}\selectfont\color{deepmaroon}{\uppercase{\centerline{#1}}}}%
 {\selectlanguage{kannada}\fontsize{24pt}{28.8pt}\selectfont\color{deepmaroon}{\centerline{#2}}}%
-\end{minipage}%
+\end{fullpagebox}%
 }
 
 %~ \def\booktitle#1{%
