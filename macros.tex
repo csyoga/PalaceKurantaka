@@ -84,13 +84,13 @@ leftmargin=32.25mm,rightmargin=32.25mm,footskip=0pt]{zwpagelayout}
 %\definecolor{ArchivalCream}{HTML}{F4EFE7} % A soft cream for your archive
 %\pagecolor{ArchivalCream}
 
-%~ \definecolor{creamwhite}{RGB}{252,251,244}
-%~ \pagecolor{creamwhite}
+\definecolor{creamwhite}{RGB}{252,251,244}
+\pagecolor{creamwhite}
 %\definecolor{deepmaroon}{RGB}{193,154,107}
 %\definecolor{deepmaroon}{RGB}{43,101,124}
 %\definecolor{deepmaroon_c}{RGB}{65,105,225}
 %\definecolor{deepmaroon}{RGB}{0,43,190}
-\definecolor{deepmaroon}{RGB}{0,22,120}
+\definecolor{deepmaroon}{RGB}{100,144,232}
 %\definecolor{deepmaroon}{RGB}{48,102,224}
 %\definecolor{deepmaroon}{RGB}{232,66,49}
 \definecolor{markcolor}{RGB}{181,143,95}
@@ -198,15 +198,14 @@ leftmargin=32.25mm,rightmargin=32.25mm,footskip=0pt]{zwpagelayout}
 \fi%
 \addcontentsline{toc}{chapter}{#1}%
 \addcontentsline{tocka}{chapter}{\kantoc{#2}}%
-\newpage%
 }
 
 
 \long\def\preparehead#1#2{%
-\vspace*{\fill}
-    {\selectlanguage{english}\cormorant\fontsize{24pt}{28.8pt}\selectfont\color{deepmaroon}{\uppercase{\centerline{#1}}}}%
-    {\selectlanguage{kannada}\fontsize{24pt}{28.8pt}\selectfont\color{deepmaroon}{\centerline{#2}}}%
-\vspace*{\fill}
+\begin{minipage}[c][\textheight][c]{\textwidth}%
+{\selectlanguage{english}\cormorant\fontsize{24pt}{28.8pt}\selectfont\color{deepmaroon}{\uppercase{\centerline{#1}}}}%
+{\selectlanguage{kannada}\fontsize{24pt}{28.8pt}\selectfont\color{deepmaroon}{\centerline{#2}}}%
+\end{minipage}%
 }
 
 %~ \def\booktitle#1{%
