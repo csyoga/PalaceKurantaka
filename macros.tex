@@ -72,6 +72,7 @@ leftmargin=32.25mm,rightmargin=32.25mm,footskip=0pt]{zwpagelayout}
 %using regular toc file for english
 \usepackage{titletoc}
 \usepackage{xparse}
+\usepackage{imakeidx}
 
 %\definecolor{ArchivalCream}{HTML}{f9f1f1} % A soft cream for your archive
 %\definecolor{ArchivalCream}{HTML}{F5EFE2} % A soft cream for your archive
@@ -84,8 +85,8 @@ leftmargin=32.25mm,rightmargin=32.25mm,footskip=0pt]{zwpagelayout}
 %\definecolor{ArchivalCream}{HTML}{F4EFE7} % A soft cream for your archive
 %\pagecolor{ArchivalCream}
 
-\definecolor{creamwhite}{RGB}{252,251,244}
-\pagecolor{creamwhite}
+%~ \definecolor{creamwhite}{RGB}{252,251,244}
+%~ \pagecolor{creamwhite}
 %\definecolor{deepmaroon}{RGB}{193,154,107}
 %\definecolor{deepmaroon}{RGB}{43,101,124}
 %\definecolor{deepmaroon_c}{RGB}{65,105,225}
@@ -577,3 +578,7 @@ leftmargin=32.25mm,rightmargin=32.25mm,footskip=0pt]{zwpagelayout}
 \end{enumerate}
 \end{kan}
 }
+
+%\makeindex[title=Index,program=xindy,options=-I omega -M mystyle.xdy -L english,columnseprule=true,columns=2]
+\makeindex[title=Index,program=texindy,options=-M mystyle.xdy -L english -C utf8]
+%\makeindex
