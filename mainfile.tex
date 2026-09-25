@@ -5,23 +5,34 @@
 
 \frontmatter
 
-\thispagestyle{empty}
+\input src/titlepage
+
+\newpage
+
+\input src/copyright
+
+\newpage
+
+\input src/series_intro
+
+\newpage
 ~
 \newpage
 
-%~ \insertFullImage{046_folio_13_recto_43.jpg}
-
-%~ \newpage
-
-%~ \insertFullImage{081_folio_21_verso_78.jpg}
-
-%\newpage
-
-\thispagestyle{empty}
-~
-%~ \pagesWithBorder
+\input src/forward_hh
 
 \newpage
+
+~
+
+\newpage
+
+\input src/ack
+
+\newpage
+~
+\newpage
+
 
 {% Start local scope for ToC
   % Reduce text height by 6cm (e.g., if full page is 21cm, content area becomes 15cm)
@@ -61,61 +72,26 @@
   %\clearpage % 4. Force shipout of the final page INSIDE the scope
 }% Margins and text height automatically restore here
 
+%\listoffigures  % Generates the List of Figures
+%\newpage
+
+%\listoftables   % Generates the List of Tables
+
 \mainmatter
 
-%following are for testing
+\mainhead{INTRODUCTION}{}
 
-%\input src/dummy
+\newpage
+~
+\newpage
 
-%testing lines ends here 
+\input src/introduction
 
-%\input src/titlepage
-%\newpage
+\newpage
 
-%\thispagestyle{empty}
-%~
-%\begin{tikzpicture}[overlay, remember picture]
-  %\node[inner sep=0pt, minimum width=\paperwidth, minimum height=\paperheight] at (current page.center) {
-    %\includegraphics[width=\paperwidth, height=\paperheight, keepaspectratio]{1.jpg}
-  %};
-%\end{tikzpicture}
-
-%\newpage
-
-%\begin{tikzpicture}[overlay, remember picture]
-  %\node[inner sep=0pt, minimum width=\paperwidth, minimum height=\paperheight] at (current page.center) {
-    %\includegraphics[width=\paperwidth, height=\paperheight, keepaspectratio]{2.jpg}
-  %};
-%\end{tikzpicture}
-
-%\newpage
-
-%\begin{tikzpicture}[overlay, remember picture]
-  %\node[inner sep=0pt, minimum width=\paperwidth, minimum height=\paperheight] at (current page.center) {
-    %\includegraphics[width=\paperwidth, height=\paperheight, keepaspectratio]{1.jpg}
-  %};
-%\end{tikzpicture}
-
-%\newpage
-
-%\begin{tikzpicture}[overlay, remember picture]
-  %\node[inner sep=0pt, minimum width=\paperwidth, minimum height=\paperheight] at (current page.center) {
-    %\includegraphics[width=\paperwidth, height=\paperheight, keepaspectratio]{2.jpg}
-  %};
-%\end{tikzpicture}
+\input macros_redefined
 
 \mainhead{KORAṆṬAKAPADDHATI I}{ಕೊರಂಟಕಪದ್ಧತಿ ೧}
-%~ \begin{minipage}[c][\textheight][c]{\textwidth}
-%~ {\selectlanguage{english}\cormorant\fontsize{24pt}{28.8pt}\selectfont\color{deepmaroon}{\uppercase{\centerline{KORAṆṬAKAPADDHATI I}}}}%
-%~ {\selectlanguage{kannada}\fontsize{24pt}{28.8pt}\selectfont\color{deepmaroon}{\centerline{ಕೊರಂಟಕಪದ್ಧತಿ ೧}}}%
-%~ \end{minipage}
-%~ \newpage
-
-%~ \insertFullImage{046_folio_13_recto_43.jpg}
-
-%~ \newpage
-
-%~ \insertFullImage{081_folio_21_verso_78.jpg}
 
 \newpage
 
@@ -156,6 +132,7 @@
 \newpage
 \fi
 \input src/shatkarma
+
 \newpage
 
 %\null\vfil
@@ -172,51 +149,29 @@
 \input src/paddhati_III
 \newpage
 
+\appendix
+
+\input src/appendix
+
 \begin{multicols}{2}
 \thispagestyle{empty}
-\begingroup
+\begin{eng}
 \parindent 0pt
 \theendnotes
-\endgroup
+\end{eng}
 \end{multicols}
 
 \newpage
 
-\printindex
+\selectlanguage{english}
+\begin{eng}
+  \renewcommand{\indexname}{Index}
+  \printindex
+\end{eng}
 
 \end{document}
 
-%~ 39 40  2 x 2 (square)
-%~ 41 big
-%~ 42 big
-%~ 43 big
-%~ 44 big
-%~ 45 big image in one column and text in another column
-%~ 46, 47 2 x 2
-
-%~ stationary 
-%~ 48 big
-%~ 49, 50 2 x 2
-%~ 51, 52 square 
-%~ 53 big
-%~ 54 big
-%~ 55, 56 2 x 2
-%~ 57, 58 square
-%~ 59, 60 square
-%~ 61, 62 2 x 2
-%~ 63, 64 2 x 2
-%~ 65, 66 2 x 2
-%~ 67, 68 2 x 2
-%~ 69, 70 2 x 2
-%~ 71 big
-%~ 72 big
-%~ 73, 74 2 x 2
-%~ 75 big
-%~ STANDING POSES
-%~ 76 + 77  2x (square)
-%~ 78 through to 86 FULL HEIGHT with text to Rightside and Leftside
-%~ 87 + 88 2x (square)
-%~ 89 through to 94 FULL HEIGHT with text to Rightside and Leftside
-
-
+%~ fig 5 and 6
+%~ captions to bottom aligned to figures
+%~ url font to be junicode
 
