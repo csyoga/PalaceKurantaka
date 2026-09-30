@@ -128,12 +128,12 @@
     % STARRED VARIANT: Unnumbered + TOC Entry
     % ----------------------------------------------------
     \iflanguage{kannada}{%
-      {\color{deepmaroon}{#3}}%
+      {\fontsize{12pt}{14.4pt}\selectfont\color{deepmaroon}{#3}}%
       \addcontentsline{tocka}{subsubsection}{%
         \kantoc{\ifstrempty{#2}{#3}{#2}}%
       }%
     }{%
-      {{\cormorant\selectfont\color{deepmaroon}{#3}}}%
+      {{\cormorant\fontsize{12pt}{14.4pt}\selectfont\color{deepmaroon}{#3}}}%
       \addcontentsline{toc}{subsubsection}{%
         \ifstrempty{#2}{#3}{#2}%
       }%
@@ -145,12 +145,12 @@
     \refstepcounter{subsubsection}% Increment subsubsection counter
     \iflanguage{kannada}{%
       % 1. Measure exact width of "\thesubsubsection.\quad"
-      \sbox{\ssubsecnumbox}{\thesubsubsection.\quad}%
+      \sbox{\ssubsecnumbox}{\fontsize{12pt}{14.4pt}\selectfont\thesubsubsection.\quad}%
       % 2. Set hanging indent equal to the measured width
       \hangindent=\wd\ssubsecnumbox
       \hangafter=1
       % 3. Typeset heading
-      {\usebox{\ssubsecnumbox}\color{deepmaroon}{#3}}%
+      {\fontsize{12pt}{14.4pt}\selectfont\usebox{\ssubsecnumbox}\color{deepmaroon}{#3}}%
       % 4. Add to .tocka File
       \addcontentsline{tocka}{subsubsection}{%
         \protect\numberline{\thesubsubsection}%
@@ -158,12 +158,12 @@
       }%
     }{%
       % 1. Measure exact width of English subsubsection number
-      \sbox{\ssubsecnumbox}{{\cormorant\selectfont\thesubsubsection.\quad}}%
+      \sbox{\ssubsecnumbox}{{\cormorant\fontsize{12pt}{14.4pt}\selectfont\thesubsubsection.\quad}}%
       % 2. Set hanging indent
       \hangindent=\wd\ssubsecnumbox
       \hangafter=1
       % 3. Typeset heading
-      {{\cormorant\selectfont\usebox{\ssubsecnumbox}\color{deepmaroon}{#3}}}%
+      {{\cormorant\fontsize{12pt}{14.4pt}\selectfont\usebox{\ssubsecnumbox}\color{deepmaroon}{#3}}}%
       % 4. Add to standard .toc File
       \addcontentsline{toc}{subsubsection}{%
         \protect\numberline{\thesubsubsection}%

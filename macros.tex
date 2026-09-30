@@ -670,10 +670,16 @@ leftmargin=32.25mm,rightmargin=32.25mm,footskip=0pt]{zwpagelayout}
 \renewcommand{\@dotsep}{10000}
 \def\@makeenmark{$^{\theenmark}$}
 
-\renewcommand{\enoteheading}{%
-  \section*{\notesname}%
-  \markboth{}{} % This clears the header text for this section
-}
+\renewcommand{\enoteheading}{}
+
+%~ \renewcommand{\enoteheading}{%
+  %~ \begin{eng}
+	  %~ \begin{center}
+	  %~ \Section*{\notesname}%
+	  %~ \markboth{}{} % This clears the header text for this section
+	  %~ \end{center}	
+  %~ \end{eng}	
+%~ }
 
 \renewcommand{\enoteformat}{%
    \noindent\makebox{\theenmark. }% Place number in the margin space
@@ -859,6 +865,7 @@ leftmargin=32.25mm,rightmargin=32.25mm,footskip=0pt]{zwpagelayout}
                 \columnsep 35\p@
                 \let\item\@idxitem}
                {\if@restonecol\onecolumn\else\clearpage\fi}
+
 \makeatother
 
 %\makeindex[title=Index,program=xindy,options=-I omega -M mystyle.xdy -L english,columnseprule=true,columns=2]
@@ -878,3 +885,7 @@ leftmargin=32.25mm,rightmargin=32.25mm,footskip=0pt]{zwpagelayout}
 \flushcolumns
 
 \newenvironment{nohyp}{\begingroup\hyphenpenalty=10000\exhyphenpenalty=10000\sloppy}{\endgroup}
+\def\pushpika{%
+\begin{center}%
+\includegraphics[scale=0.03]{forprint/pushpika2.png}%
+\end{center}}

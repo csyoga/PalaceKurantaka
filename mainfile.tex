@@ -30,7 +30,13 @@
 \input src/ack
 
 \newpage
+
+\input src/editorial_note
+
+\newpage
+
 ~
+
 \newpage
 
 
@@ -72,10 +78,21 @@
   %\clearpage % 4. Force shipout of the final page INSIDE the scope
 }% Margins and text height automatically restore here
 
-%\listoffigures  % Generates the List of Figures
-%\newpage
+\newpage
 
-%\listoftables   % Generates the List of Tables
+\begin{eng}
+\addcontentsline{toc}{chapter}{List of Figures}
+\listoffigures  % Generates the List of Figures
+\end{eng}
+
+\newpage
+
+\begin{eng}
+\addcontentsline{toc}{chapter}{List of Tables}
+\listoftables   % Generates the List of Tables
+\end{eng}
+
+\newpage
 
 \mainmatter
 
@@ -162,6 +179,11 @@
 \input src/bibliography
 
 \newpage
+
+\begin{center}
+\Section*{\notesname}%
+\end{center}
+\vskip 22pt
 
 \begin{multicols}{2}
 \thispagestyle{empty}
