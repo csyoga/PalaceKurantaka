@@ -331,15 +331,22 @@ leftmargin=32.25mm,rightmargin=32.25mm,footskip=0pt]{zwpagelayout}
 % Temporary box register to calculate the number's exact width dynamically
 \newsavebox{\secnumbox}
 
+\makeatletter
 \NewDocumentCommand{\Section}{s O{} m}{%
   % #1 = * (True if starred, False if unstarred)
   % #2 = Optional short title for TOC
   % #3 = Mandatory section heading text
-  %\par\vspace{1.5em}
+  %\par
+  % --- Column Check using \col@number ---
+  \ifnum\col@number>1
+    \raggedright % Multi-column mode: Left-aligned
+  \else
+    \centering   % Single-column mode: Centered
+  \fi
   \noindent
   \IfBooleanTF{#1}{%
     % ----------------------------------------------------
-    % STARRED VARIANT: Unnumbered + TOC Entry (No Hanging Indent Needed)
+    % STARRED VARIANT: Unnumbered + TOC Entry
     % ----------------------------------------------------
     \iflanguage{kannada}{%
       {\fontsize{22pt}{26.4pt}\selectfont\color{deepmaroon}{#3}}%
@@ -358,37 +365,31 @@ leftmargin=32.25mm,rightmargin=32.25mm,footskip=0pt]{zwpagelayout}
     % ----------------------------------------------------
     \refstepcounter{section}%
     \iflanguage{kannada}{%
-      % 1. Measure the exact width of "\thesection. " (or "\thesection\quad ")
       \sbox{\secnumbox}{\fontsize{22pt}{26.4pt}\selectfont\color{deepmaroon}{\thesection.\quad}}%
-      % 2. Set hanging indent for wrapped lines equal to the measured width
-      \hangindent=\wd\secnumbox
-      \hangafter=1
-      % 3. Typeset heading
+      \ifnum\col@number>1
+        \hangindent=\wd\secnumbox\hangafter=1
+      \fi
       {\fontsize{22pt}{26.4pt}\selectfont\color{deepmaroon}{\usebox{\secnumbox}#3}}%
-      % 4. Add to .tocka
       \addcontentsline{tocka}{section}{%
         \protect\numberline{\thesection}%
         \kantoc{\ifstrempty{#2}{#3}{#2}}%
       }%
     }{%
-      % 1. Measure the exact width of English section number
       \sbox{\secnumbox}{\cormorant\fontsize{22pt}{26.4pt}\selectfont\color{deepmaroon}{\thesection.\quad}}%
-      % 2. Set hanging indent
-      \hangindent=\wd\secnumbox
-      \hangafter=1
-      % 3. Typeset heading
+      \ifnum\col@number>1
+        \hangindent=\wd\secnumbox\hangafter=1
+      \fi
       {\cormorant\fontsize{22pt}{26.4pt}\selectfont\color{deepmaroon}{\usebox{\secnumbox}#3}}%
-      % 4. Add to standard .toc
       \addcontentsline{toc}{section}{%
         \protect\numberline{\thesection}%
         \ifstrempty{#2}{#3}{#2}%
       }%
     }%
   }%
-  %\par\vspace{1em}
-  \noindent\ignorespaces%
+  %\par\nobreak
+  \noindent\ignorespaces
 }
-
+\makeatother
 
 %~ \newcommand{\Section}[2][]{%
   %~ \iflanguage{kannada}{%

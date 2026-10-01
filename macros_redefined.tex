@@ -1,61 +1,68 @@
 
+\makeatletter
 \RenewDocumentCommand{\Section}{s O{} m}{%
   % #1 = * (True if starred, False if unstarred)
   % #2 = Optional short title for TOC
   % #3 = Mandatory section heading text
-  %\par\vspace{1.5em}
-  \noindent
-  \IfBooleanTF{#1}{%
-    % ----------------------------------------------------
-    % STARRED VARIANT: Unnumbered + TOC Entry (No Hanging Indent Needed)
-    % ----------------------------------------------------
-    \iflanguage{kannada}{%
-      {\fontsize{18pt}{21.6pt}\selectfont\color{deepmaroon}{#3}}%
-      \addcontentsline{tocka}{section}{%
-        \kantoc{\ifstrempty{#2}{#3}{#2}}%
+  %\par\addvspace{1.5em}%
+  \begingroup % <--- Start local scope for alignment
+    % --- Automatic Column Detection ---
+    \ifnum\col@number>1
+      \raggedright % Multi-column mode: Left-aligned
+    \else
+      \centering   % Single-column mode: Centered
+    \fi
+    \noindent
+    \IfBooleanTF{#1}{%
+      % ----------------------------------------------------
+      % STARRED VARIANT
+      % ----------------------------------------------------
+      \iflanguage{kannada}{%
+        {\fontsize{18pt}{21.6pt}\selectfont\color{deepmaroon}{#3}}%
+        \addcontentsline{tocka}{section}{%
+          \kantoc{\ifstrempty{#2}{#3}{#2}}%
+        }%
+      }{%
+        {\cormorant\fontsize{18pt}{21.6pt}\selectfont\color{deepmaroon}{#3}}%
+        \addcontentsline{toc}{section}{%
+          \ifstrempty{#2}{#3}{#2}%
+        }%
       }%
     }{%
-      {\cormorant\fontsize{18pt}{21.6pt}\selectfont\color{deepmaroon}{#3}}%
-      \addcontentsline{toc}{section}{%
-        \ifstrempty{#2}{#3}{#2}%
+      % ----------------------------------------------------
+      % UNSTARRED VARIANT
+      % ----------------------------------------------------
+      \refstepcounter{section}%
+      \iflanguage{kannada}{%
+        \sbox{\secnumbox}{\fontsize{18pt}{21.6pt}\selectfont\color{deepmaroon}{\thesection.\quad}}%
+        \ifnum\col@number>1
+          \hangindent=\wd\secnumbox
+          \hangafter=1
+        \fi
+        {\fontsize{18pt}{21.6pt}\selectfont\color{deepmaroon}{\usebox{\secnumbox}#3}}%
+        \addcontentsline{tocka}{section}{%
+          \protect\numberline{\thesection}%
+          \kantoc{\ifstrempty{#2}{#3}{#2}}%
+        }%
+      }{%
+        \sbox{\secnumbox}{\cormorant\fontsize{18pt}{21.6pt}\selectfont\color{deepmaroon}{\thesection.\quad}}%
+        \ifnum\col@number>1
+          \hangindent=\wd\secnumbox
+          \hangafter=1
+        \fi
+        {\cormorant\fontsize{18pt}{21.6pt}\selectfont\color{deepmaroon}{\usebox{\secnumbox}#3}}%
+        \addcontentsline{toc}{section}{%
+          \protect\numberline{\thesection}%
+          \ifstrempty{#2}{#3}{#2}%
+        }%
       }%
     }%
-  }{%
-    % ----------------------------------------------------
-    % UNSTARRED VARIANT: Numbered + Hanging Indentation + TOC Entry
-    % ----------------------------------------------------
-    \refstepcounter{section}%
-    \iflanguage{kannada}{%
-      % 1. Measure the exact width of "\thesection. " (or "\thesection\quad ")
-      \sbox{\secnumbox}{\fontsize{18pt}{21.6pt}\selectfont\color{deepmaroon}{\thesection.\quad}}%
-      % 2. Set hanging indent for wrapped lines equal to the measured width
-      \hangindent=\wd\secnumbox
-      \hangafter=1
-      % 3. Typeset heading
-      {\fontsize{18pt}{21.6pt}\selectfont\color{deepmaroon}{\usebox{\secnumbox}#3}}%
-      % 4. Add to .tocka
-      \addcontentsline{tocka}{section}{%
-        \protect\numberline{\thesection}%
-        \kantoc{\ifstrempty{#2}{#3}{#2}}%
-      }%
-    }{%
-      % 1. Measure the exact width of English section number
-      \sbox{\secnumbox}{\cormorant\fontsize{18pt}{21.6pt}\selectfont\color{deepmaroon}{\thesection.\quad}}%
-      % 2. Set hanging indent
-      \hangindent=\wd\secnumbox
-      \hangafter=1
-      % 3. Typeset heading
-      {\cormorant\fontsize{18pt}{21.6pt}\selectfont\color{deepmaroon}{\usebox{\secnumbox}#3}}%
-      % 4. Add to standard .toc
-      \addcontentsline{toc}{section}{%
-        \protect\numberline{\thesection}%
-        \ifstrempty{#2}{#3}{#2}%
-      }%
-    }%
-  }%
-  %\par\vspace{1em}
+    \par % <--- End paragraph WHILE STILL INSIDE the alignment group
+  \endgroup % <--- Restore original paragraph alignment parameters for body text
+  %\nobreak\addvspace{1em}%
   \noindent\ignorespaces%
 }
+\makeatother
 
 
 \RenewDocumentCommand{\Subsection}{s O{} m}{%
@@ -150,7 +157,7 @@
       \hangindent=\wd\ssubsecnumbox
       \hangafter=1
       % 3. Typeset heading
-      {\fontsize{12pt}{14.4pt}\selectfont\usebox{\ssubsecnumbox}\color{deepmaroon}{#3}}%
+      {\usebox{\ssubsecnumbox}\color{deepmaroon}{#3}}%
       % 4. Add to .tocka File
       \addcontentsline{tocka}{subsubsection}{%
         \protect\numberline{\thesubsubsection}%
@@ -163,7 +170,7 @@
       \hangindent=\wd\ssubsecnumbox
       \hangafter=1
       % 3. Typeset heading
-      {{\cormorant\fontsize{12pt}{14.4pt}\selectfont\usebox{\ssubsecnumbox}\color{deepmaroon}{#3}}}%
+      {{\cormorant\selectfont\usebox{\ssubsecnumbox}\color{deepmaroon}{#3}}}%
       % 4. Add to standard .toc File
       \addcontentsline{toc}{subsubsection}{%
         \protect\numberline{\thesubsubsection}%
